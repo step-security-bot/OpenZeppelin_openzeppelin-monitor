@@ -34,6 +34,11 @@ jobs:
             platform: macos-latest
     runs-on: ${{ matrix.platform }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
       - name: Get github app token
         uses: actions/create-github-app-token@3ff1caaa28b64c9cc276ce0a02e2ff584f3900c5  # v2.0.2
         id: gh-app-token
@@ -79,6 +84,11 @@ jobs:
     env:
       TAG: ${{ needs.build.outputs.release_tag }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
       - name: Get github app token
         uses: actions/create-github-app-token@3ff1caaa28b64c9cc276ce0a02e2ff584f3900c5  # v2.0.2
         id: gh-app-token

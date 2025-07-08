@@ -11,6 +11,11 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@6c439dc8bdf85cadbbce9ed30d1c7b959517bc49 # v2.12.2
+        with:
+          egress-policy: audit
+
       - uses: thehanimo/pr-title-checker@7fbfe05602bdd86f926d3fb3bccb6f3aed43bc70  # v1.4.3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
